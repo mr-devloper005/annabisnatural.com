@@ -21,8 +21,8 @@ export const globalContent = {
     },
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
-    description: 'A connected publishing surface for articles, visuals, listings, profiles, bookmarks, and downloadable resources.',
+    tagline: 'A home for stories worth reading',
+    description: 'A publishing community where writers share their work and readers discover voices worth following.',
     columns: [
       {
         title: 'Explore',
