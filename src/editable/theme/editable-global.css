@@ -97,8 +97,50 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--slot4-accent-fill) 28%, transparent);
-  color: var(--slot4-page-text);
+  background: #EF4444;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #EF4444;
+  color: #ffffff;
+}
+
+@keyframes editable-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes editable-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes editable-scroll-x {
+  to { transform: translateX(-50%); }
+}
+
+.editable-marquee {
+  display: flex;
+  width: max-content;
+  animation: editable-scroll-x 40s linear infinite;
+}
+
+.editable-marquee:hover {
+  animation-play-state: paused;
+}
+
+.editable-float {
+  animation: editable-float 8s ease-in-out infinite;
+}
+
+.editable-gradient-text {
+  background: linear-gradient(90deg, #f472b6, #a855f7, #f472b6);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: editable-shimmer 5s linear infinite;
 }
 
 ::-webkit-scrollbar-track {
@@ -121,3 +163,84 @@ body {
 .article-content a {
   color: var(--slot4-accent-fill);
 }
+
+/* =========================================================================
+   Site-wide dark mode
+   Activated when <html> has the `.dark` class (toggled from the navbar).
+   Only affects elements inside the editable site root, so nothing outside
+   src/editable/ is modified.
+   ========================================================================= */
+
+html.dark,
+html.dark body {
+  background-color: #0b0b12 !important;
+  color: #e6e7ee !important;
+  background-image: none !important;
+  color-scheme: dark;
+}
+
+html.dark .editable-site-root {
+  --slot4-page-bg: #0b0b12;
+  --slot4-page-text: #e6e7ee;
+  --slot4-surface-bg: #14141d;
+  --slot4-panel-bg: #14141d;
+  --slot4-muted-text: #9ca3af;
+  --editable-border: #2a2a36;
+  --editable-nav-bg: #0b0b12;
+  --editable-nav-text: #e6e7ee;
+}
+
+/* Backgrounds */
+html.dark .editable-site-root .bg-white,
+html.dark .editable-site-root [class*="bg-white/"] { background-color: #14141d !important; }
+html.dark .editable-site-root .bg-gray-50 { background-color: #10101a !important; }
+html.dark .editable-site-root .bg-gray-100 { background-color: #1a1a26 !important; }
+html.dark .editable-site-root .bg-gray-200 { background-color: #232333 !important; }
+html.dark .editable-site-root .bg-gray-900,
+html.dark .editable-site-root .bg-black { background-color: #f5f5fa !important; color: #0b0b12 !important; }
+
+/* Text */
+html.dark .editable-site-root .text-black,
+html.dark .editable-site-root .text-gray-900 { color: #f2f3f7 !important; }
+html.dark .editable-site-root .text-gray-800 { color: #e5e7ef !important; }
+html.dark .editable-site-root .text-gray-700 { color: #cfd1db !important; }
+html.dark .editable-site-root .text-gray-600 { color: #b7b9c4 !important; }
+html.dark .editable-site-root .text-gray-500 { color: #9aa0ad !important; }
+html.dark .editable-site-root .text-gray-400 { color: #7a8090 !important; }
+html.dark .editable-site-root .text-white { color: #ffffff !important; }
+
+/* Borders */
+html.dark .editable-site-root .border-gray-100,
+html.dark .editable-site-root .border-gray-200,
+html.dark .editable-site-root [class*="border-[#e5e7eb]"],
+html.dark .editable-site-root .border-black { border-color: #2a2a36 !important; }
+html.dark .editable-site-root .divide-gray-100 > * + *,
+html.dark .editable-site-root .divide-gray-200 > * + * { border-color: #2a2a36 !important; }
+
+/* Accent chips (soft indigo/fuchsia backgrounds) */
+html.dark .editable-site-root .bg-indigo-50 { background-color: rgba(99,102,241,0.15) !important; }
+html.dark .editable-site-root .text-indigo-700 { color: #a5b4fc !important; }
+html.dark .editable-site-root .bg-fuchsia-50 { background-color: rgba(217,70,239,0.15) !important; }
+html.dark .editable-site-root .text-fuchsia-700 { color: #f0abfc !important; }
+
+/* Inputs */
+html.dark .editable-site-root input,
+html.dark .editable-site-root textarea,
+html.dark .editable-site-root select {
+  background-color: #14141d !important;
+  color: #e6e7ee !important;
+  border-color: #2a2a36 !important;
+}
+html.dark .editable-site-root input::placeholder,
+html.dark .editable-site-root textarea::placeholder { color: #6b7180 !important; }
+
+/* Shadows read too soft on dark — deepen them */
+html.dark .editable-site-root .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.4) !important; }
+html.dark .editable-site-root .shadow-md,
+html.dark .editable-site-root .shadow-lg,
+html.dark .editable-site-root .shadow-xl { box-shadow: 0 12px 40px rgba(0,0,0,0.55) !important; }
+
+/* Scrollbar */
+html.dark ::-webkit-scrollbar-track { background: #10101a; }
+html.dark ::-webkit-scrollbar-thumb { background: #2a2a36; }
+html.dark ::-webkit-scrollbar-thumb:hover { background: #3a3a4a; }

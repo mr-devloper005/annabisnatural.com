@@ -9,6 +9,7 @@ import { taskPageMetadata } from '@/config/site.content'
 import { taskPageVoices } from '@/editable/content/task-pages.content'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 import { getTaskTheme, taskThemeStyle } from '@/editable/theme/task-themes'
+import { Ads } from '@/lib/ads'
 
 export const revalidate = 3
 
@@ -151,6 +152,10 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
               <p className="mt-2 text-sm leading-6 text-[var(--tk-muted)]">Try another category, or check back after new {label.toLowerCase()} are published.</p>
             </div>
           )}
+
+          <div className="mx-auto mt-14 max-w-6xl">
+            <Ads slot="in-feed" showLabel eager className="mx-auto w-full" />
+          </div>
 
           {posts.length ? (
             <nav className="mt-16 flex items-center justify-center gap-3 text-sm">
